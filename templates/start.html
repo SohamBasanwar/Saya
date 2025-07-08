@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="start-page">
+  <img src="{{ url_for('static', path='/cherry_blossom_tree.png') }}" alt="Cherry Blossom Tree" class="blossom-tree">
+
+  <!-- Falling petals -->
+  <img src="{{ url_for('static', path='/petal.png') }}" class="falling-petal-back petal1" alt="petal">
+  <img src="{{ url_for('static', path='/petal.png') }}" class="falling-petal-back petal2" alt="petal">
+  <img src="{{ url_for('static', path='/petal.png') }}" class="falling-petal-front petal3" alt="petal">
+  <img src="{{ url_for('static', path='/petal.png') }}" class="falling-petal-front petal4" alt="petal">
+  <img src="{{ url_for('static', path='/petal.png') }}" class="falling-petal-back petal5" alt="petal">
+  <img src="{{ url_for('static', path='/petal.png') }}" class="falling-petal-back petal6" alt="petal">
+  <img src="{{ url_for('static', path='/petal.png') }}" class="falling-petal-front petal7" alt="petal">
+
+
+  <div class="start-form-wrapper">
+    <h2 class="mb-4 text-center">Welcome to Saya~ 🧹</h2>
+    <form method="post" action="/chat-start" class="card p-4 shadow mx-auto" style="max-width: 500px;">
+      <div class="mb-3">
+        <label for="relation" class="form-label">How are you related to Soham?</label>
+        <input type="text" name="relation" id="relation" class="form-control" placeholder="e.g. friend, client, stranger..." required>
+        <small class="form-text text-muted">
+          💬 If you are <strong>Master Soham</strong>, enter your secret keyword to unlock Saya's heart~ 💖
+        </small>
+      </div>
+      <button type="submit" class="btn btn-primary">Begin Chatting</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

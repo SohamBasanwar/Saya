@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#d63384">
+
+    <title>Saya</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', path='/favicon.png') }}">
+
+    <style>
+      #emotion-glow {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+
+      body.love      #emotion-glow { background: rgba(255, 182, 193, 0.25); }
+      body.sad       #emotion-glow { background: rgba(135, 206, 250, 0.2); }
+      body.angry     #emotion-glow { background: rgba(255, 99, 132, 0.25); }
+      body.excited   #emotion-glow { background: rgba(255, 215, 0, 0.2); }
+      body.thinking  #emotion-glow { background: rgba(138, 43, 226, 0.2); }
+      body.welcome   #emotion-glow { background: rgba(152, 251, 152, 0.2); }
+      body.ready     #emotion-glow { background: rgba(245, 245, 245, 0.15); }
+    </style>
+  </head>
+
+  <body>
+    {% include 'navbar.html' %}
+    {% block content %}{% endblock %}
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // === Navbar Toggle ===
+        const toggle = document.getElementById("saya-navbar-toggle");
+        const panel = document.getElementById("saya-nav-panel");
+        let showing = false;
+
+        if (toggle && panel) {
+          toggle.addEventListener("click", () => {
+            showing = !showing;
+            panel.className = showing
+              ? 'saya-slide-panel show-header'
+              : 'saya-slide-panel hide-header';
+            toggle.textContent = showing ? '✖' : '☰';
+          });
+        }
+
+        // === Scroll Hide Navbar ===
+        let lastScroll = 0;
+        const navbar = document.querySelector('.saya-navbar');
+
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.pageYOffset;
+
+          if (currentScroll > lastScroll && currentScroll > 50) {
+            navbar.style.transform = 'translateY(-100%)';
+            navbar.style.opacity = '0';
+          } else {
+            navbar.style.transform = 'translateY(0)';
+            navbar.style.opacity = '1';
+          }
+
+          lastScroll = currentScroll;
+        });
+
+        // === Petal Generator (only if petal-container exists) ===
+        const petalContainer = document.getElementById("petal-container");
+        if (petalContainer) {
+          const numPetals = 9;
+          for (let i = 0; i < numPetals; i++) {
+            const petal = document.createElement("img");
+            petal.src = "{{ url_for('static', path='/petal.png') }}";
+            petal.classList.add("falling-petal");
+
+            const left = 55 + Math.random() * 30;
+            const duration = 6 + Math.random() * 4;
+            const delay = Math.random() * 5;
+
+            petal.style.left = `${left}%`;
+            petal.style.animationDuration = `${duration}s`;
+            petal.style.animationDelay = `${delay}s`;
+
+            petalContainer.appendChild(petal);
+          }
+        }
+      });
+    </script>
+
+    <!-- Saya’s Glow -->
+    <div id="emotion-glow"></div>
+  </body>
+</html>

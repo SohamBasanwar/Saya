@@ -1,0 +1,20 @@
+<nav class="saya-navbar">
+  <!-- Toggle + Brand -->
+  <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center">
+      <button class="header__menu" id="saya-navbar-toggle">☰</button>
+      <span class="saya-logo ms-2">Saya</span>
+    </div>
+  </div>
+
+  <!-- Sliding Menu Panel -->
+  <ul class="saya-slide-panel hide-header" id="saya-nav-panel">
+    <li><a href="/">Chat</a></li>
+    <li><a href="/image">Images</a></li>
+    {% if is_master %}
+      <li class="master-tag">💖 Master Mode</li>
+    {% else %}
+      <li class="guest-tag">🫖 Guest</li>
+    {% endif %}
+  </ul>
+</nav>

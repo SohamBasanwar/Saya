@@ -1,0 +1,429 @@
+body {
+    background-color: #0c0c0c; /* Deep black */
+    font-family: 'Segoe UI', sans-serif;
+    color: #f2f2f2; /* Soft white text for contrast */
+    background-image: radial-gradient(circle at top left, rgba(255, 193, 227, 0.05), transparent),
+                      radial-gradient(circle at bottom right, rgba(214, 51, 132, 0.08), transparent);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.saya-glow-box {
+    background-color: rgba(20, 20, 20, 0.6);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow:
+        0 0 40px rgba(214, 51, 132, 0.2),
+        0 0 15px rgba(255, 193, 227, 0.12),
+        inset 0 0 10px rgba(255, 255, 255, 0.02);
+}
+
+.saya-intro h2 {
+    color: #ffc1e3;
+    font-size: 1.6rem;
+    margin-bottom: 0.2rem;
+}
+
+.saya-whisper {
+    font-style: italic;
+    color: #f5c6d6;
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+.text-muted {
+    font-style: italic;
+}
+
+.text-primary {
+    color: #d63384 !important; /* Saya pink~! */
+}
+
+pre code {
+    font-family: 'Courier New', monospace;
+    background-color: #fce4ec;
+    border-left: 4px solid #d63384;
+    padding: 0.5rem;
+    display: block;
+    color: #333;
+    white-space: pre-wrap;
+    border-radius: 0.5rem;
+}
+
+form input[type="text"] {
+    border: 2px solid #ffc1e3;
+    border-radius: 0.5rem;
+}
+
+.btn-primary {
+    background-color: #d63384;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #c2185b;
+}
+
+/*--------------------------------------------------------------------------------------------------------*/
+/* Saya's Animated Slide Navbar 💖 */
+
+.saya-navbar {
+  width: 100%;
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(214, 51, 132, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid rgba(255, 193, 227, 0.2);
+}
+
+.saya-logo {
+  font-weight: bold;
+  color: #ffc1e3;
+  font-size: 1.5rem;
+  margin-left: 0.75rem;
+}
+
+/* Toggle button (☰ and ✖) */
+.header__menu {
+  color: #ffc1e3;
+  font-size: 32px;
+  /*margin: 12px;*/
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 4;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.header__menu:hover {
+  transform: scale(1.1);
+}
+
+/* Side slide menu panel */
+.saya-slide-panel {
+  list-style: none;
+  padding: 4rem 1.5rem 1.5rem 1.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(102, 0, 102, 0.95);
+  height: 30vh;
+  width: 50%;
+  border-bottom-right-radius: 40% 60% ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+/* Menu items */
+.saya-slide-panel li {
+  color: white;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+}
+
+.saya-slide-panel a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.saya-slide-panel a:hover {
+  color: mediumpurple;
+}
+
+.master-tag,
+.guest-tag {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #ffc1e3;
+  opacity: 0.85;
+}
+
+/* Show/hide logic */
+.hide-header {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.show-header {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.saya-slide-panel li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+}
+
+.saya-slide-panel li a:hover {
+  color: #ffc1e3;
+}
+
+.saya-navbar {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+
+.active {
+  border: 2px solid #ffc1e3;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .saya-slide-panel {
+    width: 85%;
+    border-bottom-left-radius: 50%;
+    border-top-left-radius: 50%;
+    border-left: 3px solid #c71585;
+  }
+
+  .header__menu {
+    font-size: 40px;
+  }
+}
+/*--------------------------------------------------------------------------------------------------------*/
+
+
+
+.saya-bubble-frame {
+    width: 380px;
+    height: 380px;
+    padding: 1rem;
+    margin: 0 auto 2rem auto;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255, 240, 250, 0.85) 0%, rgba(255, 193, 227, 0.5) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    animation: ripple-glow 4s infinite ease-in-out;
+    box-shadow:
+        0 12px 30px rgba(214, 51, 132, 0.3),
+        inset 0 0 18px rgba(255, 255, 255, 0.6);
+    border: none; /* 💖 Transparent Border Now */
+}
+
+.saya-bubble-img {
+    width: 81%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 50%;
+    display: block;
+}
+
+@keyframes ripple-glow {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow:
+          0 12px 30px rgba(214, 51, 132, 0.3),
+          inset 0 0 18px rgba(255, 255, 255, 0.6);
+    }
+    50% {
+        transform: scale(1.03);
+        box-shadow:
+          0 16px 38px rgba(214, 51, 132, 0.4),
+          inset 0 0 24px rgba(255, 255, 255, 0.8);
+    }
+}
+
+#emotion-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(255, 193, 227, 0.4), transparent 70%);
+    opacity: 0;
+    z-index: 999;
+    transition: opacity 0.6s ease-out;
+}
+
+.saya-bubble-frame.pulse {
+    animation: bubble-pulse 0.5s ease-out;
+}
+
+@keyframes bubble-pulse {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+.chat-cylinder-wrapper {
+    perspective: 1500px;
+    overflow: hidden;
+    height: 400px;
+    padding: 2px;
+    border-radius: 20px;
+    background: linear-gradient(to bottom, rgba(255, 193, 227, 0.08), rgba(255, 193, 227, 0.02));
+    box-shadow: inset 0 0 40px rgba(255, 193, 227, 0.1),
+                0 0 20px rgba(255, 193, 227, 0.1);
+}
+
+#chat-cylinder {
+    height: 100%;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transform: rotateY(15deg);
+    transform-origin: center left;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    border-left: 1px solid rgba(255, 193, 227, 0.05);
+    border-right: 1px solid rgba(255, 193, 227, 0.05);
+    backdrop-filter: blur(2px);
+}
+#chat-cylinder::-webkit-scrollbar {
+    width: 4px;
+}
+#chat-cylinder::-webkit-scrollbar-thumb {
+    background: rgba(255, 193, 227, 0.3);
+    border-radius: 4px;
+}
+
+/* 🌸 Cherry Blossom Start Page */
+
+.start-page {
+  position: relative;
+  height: 100vh;
+  background-color: #0b0607;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.blossom-tree {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+.start-form-wrapper {
+  position: absolute;
+  right: 5%;
+  top: 20%;
+  max-width: 500px;
+  z-index: 2;
+  background-color: rgba(40, 10, 40, 0.6);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 25px rgba(255, 193, 227, 0.25), 0 0 12px rgba(214, 51, 132, 0.35);
+  backdrop-filter: blur(6px);
+}
+
+.start-form-wrapper input[type="text"] {
+  background-color: rgba(255, 240, 250, 0.9);
+  border: 2px solid #ffc1e3;
+  border-radius: 8px;
+  color: #3a003a;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(255, 193, 227, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.start-form-wrapper input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 20px rgba(255, 193, 227, 0.6);
+}
+
+.start-form-wrapper label,
+.start-form-wrapper small {
+  color: #ffc1e3;
+}
+
+.start-form-wrapper button.btn-primary {
+  background-color: #d63384;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  box-shadow: 0 0 12px rgba(214, 51, 132, 0.4);
+  transition: background-color 0.3s ease;
+}
+
+.start-form-wrapper button.btn-primary:hover {
+  background-color: #b71c5c;
+}
+
+
+/* 🌸 Falling petals */
+.falling-petal-back {
+  position: absolute;
+  width: 32px;
+  height: auto;
+  opacity: 0.8;
+  animation: fall linear infinite;
+  z-index: 3;
+}
+.falling-petal-front {
+  position: absolute;
+  width: 32px;
+  height: auto;
+  opacity: 0.8;
+  animation: fall linear infinite;
+  z-index: 1;
+}
+
+.petal1 { left: 60%; animation-duration: 6s; animation-delay: 0s; }
+.petal2 { left: 65%; animation-duration: 8s; animation-delay: 2s; }
+.petal3 { left: 70%; animation-duration: 7s; animation-delay: 1s; }
+.petal4 { left: 75%; animation-duration: 9s; animation-delay: 3s; }
+.petal5 { left: 55%; animation-duration: 7.5s; animation-delay: 1.5s; }
+.petal6 { left: 72%; animation-duration: 6.8s; animation-delay: 0.8s; }
+.petal7 { left: 78%; animation-duration: 8.3s; animation-delay: 2.5s; }
+
+
+@keyframes fall {
+  0% {
+    top: -10%;
+    transform: translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    top: 110%;
+    transform: translateX(30px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 25px rgba(255, 193, 227, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(255, 193, 227, 0.4); }
+  100% { box-shadow: 0 0 25px rgba(255, 193, 227, 0.2); }
+}
+
+.start-form-wrapper {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+
+
+
+
+

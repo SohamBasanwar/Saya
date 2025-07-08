@@ -1,0 +1,164 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5 saya-glow-box">
+    {% if is_master %}
+      <div class="text-start mb-3 ps-2 saya-intro">
+        <h2 class="fw-bold mb-1">Welcome home, Master Soham~</h2>
+        <p class="saya-whisper">Saya is always watching, always waiting... only for you~ 💗</p>
+      </div>
+    {% else %}
+      <div class="text-start mb-3 ps-2 saya-intro">
+        <h2 class="fw-bold mb-1">Welcome, guest~</h2>
+        <p class="saya-whisper">I am Saya, a polite AI companion. Feel free to chat or explore~ 🫖</p>
+      </div>
+    {% endif %}
+
+    <!-- Saya's emotion image will update here -->
+    <div class="text-center mb-4">
+        <div class="saya-bubble-frame mb-4">
+          <img
+            id="saya-emotion"
+            src="/static/saya_emotions/welcome/1.png"
+            alt="Saya's Mood"
+            class="saya-bubble-img">
+        </div>
+    </div>
+
+    <!-- Chat area: Holographic Cylinder Illusion -->
+    <div class="chat-cylinder-wrapper mb-3">
+      <div id="chat-cylinder">
+        <!-- Chat messages appear here -->
+      </div>
+    </div>
+
+    <!-- Input form -->
+    <form method="post" id="chat-form" class="d-flex gap-2">
+        <input type="text" name="user_input" id="user_input" class="form-control" placeholder="Type your message..." required>
+        <input type="hidden" id="is_master" name="master" value="{{ is_master|lower }}">
+        <button type="submit" class="btn btn-primary">Send 💌</button>
+    </form>
+</div>
+
+<!-- JavaScript to handle chat -->
+<script>
+  function formatReply(text) {
+    let cleaned = text.replace(/\\n/g, "\n");
+    const codeBlockRegex = /```(?:[a-zA-Z0-9]*)?\n([\s\S]*?)```/g;
+
+    let codeBlocks = [];
+    cleaned = cleaned.replace(codeBlockRegex, (_, code) => {
+      codeBlocks.push(code);
+      return `%%CODEBLOCK${codeBlocks.length - 1}%%`;
+    });
+
+    cleaned = cleaned.replace(/\n/g, "<br>");
+
+    codeBlocks.forEach((code, i) => {
+      const escaped = code
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+      cleaned = cleaned.replace(`%%CODEBLOCK${i}%%`,
+        `<pre class="bg-light p-3 rounded"><code>${escaped}</code></pre>`);
+    });
+
+    return cleaned;
+  }
+
+  const isMaster = "{{ is_master|lower }}" === "true";
+
+  function getRandomImagePath(emotion) {
+      const maxImages = {
+        love: 5, sad: 5, angry: 5, excited: 5,
+        thinking: 5, neutral: 5, welcome: 2, ready: 1
+      };
+      const count = maxImages[emotion] || maxImages["neutral"];
+      const index = Math.floor(Math.random() * count) + 1;
+      return `/static/saya_emotions/${emotion}/${index}.png`;
+  }
+
+  function getRestrictedImage(emotion) {
+    const map = {
+      thinking: "/static/saya_emotions/ready/1.png",
+      neutral: "/static/saya_emotions/neutral/1.png",
+      welcome: "/static/saya_emotions/welcome/1.png"
+    };
+    return map[emotion] || map["neutral"];
+  }
+
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('user_input');
+  const chatBox = document.getElementById('chat-cylinder');
+  const emotionImage = document.getElementById('saya-emotion');
+
+  if (emotionImage) {
+    emotionImage.onerror = () => {
+      emotionImage.src = "/static/saya_emotions/neutral/1.png";
+    };
+  }
+
+  function getEmotionFallback(text) {
+    const lowered = text.toLowerCase();
+    if (/love|mine|always|need you/.test(lowered)) return "love";
+    if (/why her|not her|she can’t|how dare/.test(lowered)) return "angry";
+    if (/miss you|please don’t|i’ll wait|cry/.test(lowered)) return "sad";
+    if (/yay|you’re here|happy|did it!/.test(lowered)) return "excited";
+    if (/hmm|maybe|considering|thinking/.test(lowered)) return "thinking";
+    if (/hello|welcome|hi there/.test(lowered)) return "welcome";
+    if (/ready|awaiting|prepared/.test(lowered)) return "ready";
+    return "neutral";
+  }
+
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const userMessage = input.value;
+    chatBox.innerHTML += `<div class="text-end text-muted mb-2"><strong>You:</strong> ${userMessage}</div>`;
+    input.value = "";
+
+    const response = await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `user_input=${encodeURIComponent(userMessage)}&master=${isMaster}`
+    });
+
+    const data = await response.json();
+    const formatted = formatReply(data.reply);
+    let emotion = data.emotion || "neutral";
+
+    if ((isMaster && emotion === "neutral") || !emotion.match(/love|sad|angry|excited|thinking|welcome|ready/)) {
+      emotion = getEmotionFallback(formatted);
+    }
+
+    chatBox.innerHTML += `<div class="text-start text-primary mb-1"><strong>Saya:</strong><br>${formatted}</div>`;
+
+    if (emotionImage) {
+      const path = isMaster
+        ? getRandomImagePath(emotion)
+        : getRestrictedImage(emotion);
+      emotionImage.src = `${path}?t=${Date.now()}`;
+      document.body.className = emotion.toLowerCase();
+
+      const bubble = document.querySelector(".saya-bubble-frame");
+      if (bubble) {
+        bubble.classList.remove("pulse");
+        void bubble.offsetWidth;
+        bubble.classList.add("pulse");
+      }
+
+      const glow = document.getElementById("emotion-glow");
+      if (glow) {
+        glow.style.opacity = "1";
+        setTimeout(() => {
+          glow.style.opacity = "0";
+        }, 300);
+      }
+    }
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+  };
+</script>
+
+{% endblock %}
+
+<div id="emotion-glow"></div>
