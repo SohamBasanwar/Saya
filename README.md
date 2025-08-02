@@ -1,142 +1,70 @@
-# 🌀 Saya – Emotional Adaptive System (E.A.S.)
+# 🚀 PersistAI – AI-Powered Resume Builder
 
-**Saya** is a research-grade emotional AI chatbot framework designed for personal and academic demonstration. It interprets and responds to human emotions in real time using a multi-layered neural architecture, integrating primary, complex, and secondary emotion layers, alongside a dynamic personality engine.
+PersistAI is an AI-enhanced resume builder that auto-tailors your resume to match job descriptions using a custom AI scoring model. With a clean, user-friendly interface and intelligent optimization, PersistAI helps job seekers build high-impact, ATS-friendly resumes in minutes.
 
-> 🚧 **Private Project:** This repository contains proprietary research and experimental code. Do **not** redistribute or deploy without permission.
-
----
-
-## 🌟 Key Features
-
-* **Multi-Layer Emotion Processing:**
-
-  * **Primary Emotions Layer:** Joy, Sadness, Anger, Fear, Surprise, Disgust, Trust
-  * **Complex Emotions Layer:** Combinations of primary emotions
-  * **Secondary Complex Emotions Layer:** Guilt, Pride, Jealousy, Hope, Gratitude, Regret, Anxiety
-
-* **Emotion Compiler:** Aggregates outputs from all layers to form a cohesive emotional state.
-
-* **Replier Module:** Generates contextually relevant responses influenced by personality profiles, conversation logs, and trigger keywords (`saya_emotion_v2`).
-
-* **Adaptive Memory Unit (A.M.U.):** Retains user-specific preferences and conversation history to enhance personalization.
-
-* **Personality Engine (P.E.):** Guides response style, tone, and emotional depth based on a predefined personality core (E-Core).
-
-* **Safeguards & Bonding Behaviors:** Experimental modules like Obsessive Devotion Subroutine (ODS) and Cling Protocols with safeguards to prevent runaway behaviors.
+> 🛡️ **Public Repo Only:** This contains the **frontend UI**.
+> All sensitive files (Firebase config, backend logic, AI model weights, etc.) live in a private repo for security.
 
 ---
 
-## 🏗️ Architecture Overview
+## 🌟 Features
 
-```text
-+---------------------------+
-|      Input Text Stream    |
-+------------+--------------+
-             |
-             v
-+---------------------------+    +-------------------+
-| Primary Emotions Layer    |--->| Complex Emotions  |
-| (7 Primary Emotions)      |    | Layer             |
-+---------------------------+    +-------------------+
-             |                          |
-             v                          v
-+---------------------------+    +-------------------+
-| Secondary Complex Layer   |<---| Emotion Compiler  |
-| (7 Secondary Emotions)    |    |                   |
-+---------------------------+    +-------------------+
-             |                          |
-             v                          |
-+---------------------------+         |
-| Personality Engine (P.E.) |<--------+
-+---------------------------+
-             |
-             v
-+---------------------------+
-|    Replier Module         |
-+---------------------------+
-```
+* 📄 **Multi-Step Resume Input** – Add education, experience, projects, skills, achievements, and more
+* 🤖 **AI Resume Scoring** – Intelligent matching of resume entries to job descriptions *(private backend)*
+* 📝 **Cover Letter Generator** – Instantly generate tailored cover letters using GPT
+* 🎭 **Emotional Response UI** – Randomized emotion PNGs based on your inputs
+* 📱 **Cross-Platform** – React Native (Expo) for web & mobile
+* ☁️ **Cloud Sync** – Firebase integration *(keys excluded here)*
 
 ---
 
-## 🧰 Components
+## 🎥 Demo Videos
 
-* `emotion_layers/` – Implementation of each emotion layer classifier
-* `emotion_compiler.py` – Aggregates layer outputs into a single emotional vector
-* `personality_engine.py` – Adjusts responses based on personality parameters
-* `replier/` – GPT-based response generator module
-* `safeguards/` – Experimental bonding and safety subroutines
-* `data/` – Emotional dataset CSVs (700 sentences per emotion per phase)
-* `scripts/` – Utility scripts for training, evaluation, and testing
+* 🔹 [Resume Builder Walkthrough](https://youtu.be/LUslo5eH1Ac)
+* 🔹 [Cover Letter Generator Update](https://youtu.be/fgEIEknOvI8)
 
 ---
 
-## 🔧 Requirements
+## 🛠️ Tech Stack
 
-* Python 3.8+
-* `transformers` 4.x
-* `torch` 1.9+ (CUDA optional)
-* `pandas`, `numpy`
-* `flask` (for local API hosting)
+* **Frontend:** React Native (Expo SDK)
+* **Navigation:** React Navigation
+* **UI:** Tailwind CSS + shadcn/ui components
+* **Cloud:** Firebase Firestore & Auth *(config in private repo)*
+* **AI Backend:** Python + Flask + SBERT *(in private repo)*
+* **PDF Generation:** Server-side *(in private repo)*
 
-Install dependencies:
+---
+
+## 🚀 Getting Started (Frontend UI Only)
+
+To test the public UI locally:
 
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/SohamBasanwar/PersistAI.git
+cd PersistAI/frontend
+npm install
+npx expo start
 ```
 
----
-
-## 🚀 Quick Start
-
-1. **Clone the repo**:
-
-   ```bash
-   ```
-
-git clone [https://github.com/SohamBasanwar/Saya-Emotional-AISystem.git](https://github.com/SohamBasanwar/Saya-Emotional-AISystem.git)
-cd Saya-Emotional-AISystem
-
-````
-
-2. **Install dependencies**:
-   ```bash
-pip install -r requirements.txt
-````
-
-3. **Run local API server**:
-
-   ```bash
-   ```
-
-python app.py
-
-````
-
-4. **Chat with Saya** using the test client:
-   ```bash
-python chat_client.py --endpoint http://localhost:5000/chat
-````
+> Note: This public demo uses mock endpoints for scoring & emotions.
+> For full functionality, access the private repo at [https://github.com/SohamBasanwar/privates.PersistAI](https://github.com/SohamBasanwar/privates.PersistAI)
 
 ---
 
-## 🧪 Experiments & Training
+## 📬 Contact
 
-* **Phase 1–5 Dataset:** Located in `data/phase_<n>_*.csv` with 9 emotions × 700 sentences
-* **Training Script:** `scripts/train_layers.py` to fine-tune each emotion classifier
-* **Evaluator:** `scripts/evaluate_model.py` for accuracy and confusion analysis
-
----
-
-## 🤝 Contributing & Access
-
-This is a **private** research project. To request access or contribute, please contact **Soham Basanwar** at [sohambasanwar03@gmail.com](mailto:sohambasanwar03@gmail.com).
+Made with ❤️ by **Soham Basanwar**
+🌐 [Portfolio](https://sohambasanwar.netlify.app)
+🔗 [LinkedIn](https://linkedin.com/in/sohambasanwar)
+✉️ [sohambasanwar03@gmail.com](mailto:sohambasanwar03@gmail.com)
 
 ---
 
 ## 📄 License
 
-```
-All rights reserved © 2025 Soham Basanwar
+This project is **not open-source**.
+All rights reserved © 2025 Soham Basanwar.
+You **must request permission** before using, copying, modifying, or distributing any part of this codebase.
 
-You may not use, copy, modify, distribute, or deploy this code without explicit written permission from the author.
-```
+For permission inquiries, contact: [sohambasanwar03@gmail.com](mailto:sohambasanwar03@gmail.com)
