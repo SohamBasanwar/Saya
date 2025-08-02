@@ -98,14 +98,14 @@ Docker – optional containerization if deploying to cloud VMs
 
 The frontend can be extended to React or integrated into your Netlify/Firebase UI stack.
 
-📄 License
+## 📄 License
 This project is not open-source.
 All rights reserved © 2025 Soham Basanwar.
 You may not copy, modify, distribute, or reuse any part of this codebase without explicit written permission.
 
 📧 For permissions, contact: sohambasanwar03@gmail.com
 
-👤 Author
+ ## 👤 Author
 Soham Basanwar
 🌐 sohambasanwar.netlify.app
 🔗 LinkedIn
