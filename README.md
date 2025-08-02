@@ -1,70 +1,120 @@
-# 🚀 PersistAI – AI-Powered Resume Builder
+# 🧠 Saya – Emotionally Adaptive Anime-Style Chatbot
 
-PersistAI is an AI-enhanced resume builder that auto-tailors your resume to match job descriptions using a custom AI scoring model. With a clean, user-friendly interface and intelligent optimization, PersistAI helps job seekers build high-impact, ATS-friendly resumes in minutes.
+**Saya** is an emotionally intelligent AI chatbot designed to simulate human-like conversations with anime-inspired personality. Powered by OpenAI’s GPT-4o and built using FastAPI, Saya adapts its emotional tone, dialogue style, and response formatting depending on who it’s talking to — expressing feelings like love, anger, sadness, excitement, and more.
 
-> 🛡️ **Public Repo Only:** This contains the **frontend UI**.
-> All sensitive files (Firebase config, backend logic, AI model weights, etc.) live in a private repo for security.
+> 🚫 This repository is private and not open-source.  
+> All rights reserved © 2025 Soham Basanwar. Usage requires explicit permission.
 
 ---
 
 ## 🌟 Features
 
-* 📄 **Multi-Step Resume Input** – Add education, experience, projects, skills, achievements, and more
-* 🤖 **AI Resume Scoring** – Intelligent matching of resume entries to job descriptions *(private backend)*
-* 📝 **Cover Letter Generator** – Instantly generate tailored cover letters using GPT
-* 🎭 **Emotional Response UI** – Randomized emotion PNGs based on your inputs
-* 📱 **Cross-Platform** – React Native (Expo) for web & mobile
-* ☁️ **Cloud Sync** – Firebase integration *(keys excluded here)*
+- 🎭 **Two Dynamic Personas**
+  - **Master Soham**: Saya speaks in a devoted, affectionate, anime-style tone with emotional depth (e.g., love, excited, sad).
+  - **Guest Mode**: Saya speaks politely and professionally, without emotional attachment or romantic tone.
+
+- 🤖 **OpenAI GPT-4o Integration**
+  - Responses are generated with custom system prompts tailored to the user’s role.
+  - Each response is a strict JSON object containing:
+    ```json
+    {
+      "emotion": "angry",
+      "message": "Hmph! How dare someone else try to speak to you, Master Soham!"
+    }
+    ```
+
+- 🧠 **Emotion Tagging System**
+  - If the model fails to return valid JSON or misclassifies the emotion, the system uses fallback keyword-based emotion detection.
+
+- 🖼️ **Visual Emotion Feedback**
+  - Each response is paired with a matching PNG image (e.g., angry.png, love.png), dynamically rendered in the frontend UI.
+
+- 🌐 **Web Frontend with Jinja2**
+  - Users interact with Saya through a clean web interface built using Jinja2 templates (`start.html`, `home.html`).
+  - Static assets like emotion images are served from the `/resources/` directory.
+
+- ⚡ **Serverless-Ready Architecture**
+  - Includes `Mangum` integration for deploying on AWS Lambda + API Gateway.
+  - Also works seamlessly on Railway, Fly.io, Heroku, and other Python platforms.
 
 ---
 
-## 🎥 Demo Videos
+## 🧾 Project Structure
 
-* 🔹 [Resume Builder Walkthrough](https://youtu.be/LUslo5eH1Ac)
-* 🔹 [Cover Letter Generator Update](https://youtu.be/fgEIEknOvI8)
+Saya/
+├── main.py # FastAPI app with GPT, routing, and emotion parsing
+├── templates/
+│ ├── start.html # Role selection page
+│ └── home.html # Chat UI template
+├── resources/
+│ └── emotions/ # PNGs for each emotion (love.png, sad.png, etc.)
+├── static/ # Optional: JS, CSS, or fonts
+├── requirements.txt # Python dependencies
+├── LICENSE # Custom restrictive license
+└── README.md # You’re reading it
 
----
-
-## 🛠️ Tech Stack
-
-* **Frontend:** React Native (Expo SDK)
-* **Navigation:** React Navigation
-* **UI:** Tailwind CSS + shadcn/ui components
-* **Cloud:** Firebase Firestore & Auth *(config in private repo)*
-* **AI Backend:** Python + Flask + SBERT *(in private repo)*
-* **PDF Generation:** Server-side *(in private repo)*
-
----
-
-## 🚀 Getting Started (Frontend UI Only)
-
-To test the public UI locally:
-
-```bash
-git clone https://github.com/SohamBasanwar/PersistAI.git
-cd PersistAI/frontend
-npm install
-npx expo start
-```
-
-> Note: This public demo uses mock endpoints for scoring & emotions.
-> For full functionality, access the private repo at [https://github.com/SohamBasanwar/privates.PersistAI](https://github.com/SohamBasanwar/privates.PersistAI)
+yaml
+Copy
+Edit
 
 ---
 
-## 📬 Contact
+## 🚀 How to Run Locally
 
-Made with ❤️ by **Soham Basanwar**
-🌐 [Portfolio](https://sohambasanwar.netlify.app)
-🔗 [LinkedIn](https://linkedin.com/in/sohambasanwar)
-✉️ [sohambasanwar03@gmail.com](mailto:sohambasanwar03@gmail.com)
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/SohamBasanwar/saya-chatbot.git
+   cd saya-chatbot
+Set up environment
 
----
+bash
+Copy
+Edit
+python3 -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+Add your OpenAI key
 
-## 📄 License
+bash
+Copy
+Edit
+export OPENAI_API_KEY='sk-...'  # Or use .env if preferred
+Start the app
 
-This project is **not open-source**.
+bash
+Copy
+Edit
+uvicorn main:app --reload
+Visit http://localhost:8000 in your browser.
+
+☁️ Deployment Options
+Saya can be deployed using:
+
+Railway / Fly.io / Render / Heroku – simplest for hosting full FastAPI apps
+
+AWS Lambda + API Gateway – use Mangum to wrap the app
+
+Docker – optional containerization if deploying to cloud VMs
+
+The frontend can be extended to React or integrated into your Netlify/Firebase UI stack.
+
+📄 License
+This project is not open-source.
 All rights reserved © 2025 Soham Basanwar.
-You **must request permission** before using, copying, modifying, or distributing any part of this codebase.
+You may not copy, modify, distribute, or reuse any part of this codebase without explicit written permission.
 
-For permission inquiries, contact: [sohambasanwar03@gmail.com](mailto:sohambasanwar03@gmail.com)
+📧 For permissions, contact: sohambasanwar03@gmail.com
+
+👤 Author
+Soham Basanwar
+🌐 sohambasanwar.netlify.app
+🔗 LinkedIn
+📧 sohambasanwar03@gmail.com
+
+yaml
+Copy
+Edit
+
+---
+
+Let me know when you're ready for a `LICENSE` file or want to auto-generate emotion PNG links or a frontend deployment guide.
