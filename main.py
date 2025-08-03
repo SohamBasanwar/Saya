@@ -11,7 +11,7 @@ from mangum import Mangum
 
 
 openai = OpenAI(
-    api_key='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'
+    api_key='YOUR_OPENAI_API_KEY'
 )
 
 app = FastAPI()
